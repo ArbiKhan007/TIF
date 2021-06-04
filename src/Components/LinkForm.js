@@ -32,7 +32,7 @@ const MainInput = styled.input`
   width: 100%;
   border-radius: 10px;
   padding: 1rem;
-  border: 1px solid ${(props) => props.theme.gray};
+  border: ${(props) => (props.empty ? "2px solid red" : "1px solid gray")};
   outline: none;
   ::placeholder {
     color: ${(props) => props.theme.gray};
@@ -41,7 +41,7 @@ const MainInput = styled.input`
   @media (min-width: 1010px) {
     margin: 0 1rem;
     flex: 1;
-    border: 1px solid ${(props) => props.theme.gray};
+
     outline: none;
   }
 `;
@@ -49,9 +49,14 @@ const MainInput = styled.input`
 function LinkForm() {
   const [input, setInput] = useState();
   const [output, setOutput] = useState();
+  const [isEmpty, setIsEmpty] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
+
+    if (!input) {
+      setIsEmpty(true);
+    }
 
     var config = {
       method: "get",
@@ -74,6 +79,7 @@ function LinkForm() {
       <Wrapper>
         <MainForm method="get" onSubmit={handleSubmit}>
           <MainInput
+            empty={isEmpty}
             name="link"
             type="text"
             onChange={(e) => setInput(e.target.value)}
