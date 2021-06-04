@@ -4,8 +4,11 @@ import styled from "styled-components";
 
 import Button from "../extras/Buttons";
 import Wrapper from "../extras/Wrapper";
+import Output from "../Components/Output";
 import blueDesign from "../images/bg-shorten-desktop.svg";
 import blueDesignMobile from "../images/bg-shorten-mobile.svg";
+
+const FormDiv = styled.div``;
 
 const MainForm = styled.form`
   background: url(${blueDesignMobile}) no-repeat;
@@ -45,6 +48,7 @@ const MainInput = styled.input`
 
 function LinkForm() {
   const [input, setInput] = useState();
+  const [output, setOutput] = useState();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -52,52 +56,41 @@ function LinkForm() {
     var config = {
       method: "get",
       url: `https://api.shrtco.de/v2/shorten?url=${input}`,
-      headers: { "Access-Control-Allow-Origin": "http://localhost:3000/" },
+      header: {},
     };
 
     axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
+        const shortCode = response.data.result.short_link;
+        setOutput(shortCode);
       })
       .catch(function (error) {
         console.log(error);
       });
-
-    //   try {
-    //     const url = await Axios.get(
-    //       "https://api.shrtco.de/v2/shorten",
-    //       {
-    //         params: {
-    //           url: input,
-    //         },
-    //       },
-    //       config
-    //     );
-    //     if (url.ok) {
-    //       console.log(url.result);
-    //     } else {
-    //       alert("Please Check");
-    //     }
-    //   } catch (e) {
-    //     alert(e);
-    //   }
   }
 
   return (
-    <Wrapper>
-      <MainForm method="get" onSubmit={handleSubmit}>
-        <MainInput
-          name="link"
-          type="text"
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Shorten a link here..."
-        />
+    <FormDiv>
+      <Wrapper>
+        <MainForm method="get" onSubmit={handleSubmit}>
+          <MainInput
+            name="link"
+            type="text"
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Shorten a link here..."
+          />
 
-        <Button type="submit" full rect>
-          Shorten It!
-        </Button>
-      </MainForm>
-    </Wrapper>
+          <Button type="submit" full rect>
+            Shorten It!
+          </Button>
+        </MainForm>
+      </Wrapper>
+      {output ? (
+        <Output inputLink={input} outputLinks={output} />
+      ) : (
+        <span></span>
+      )}
+    </FormDiv>
   );
 }
 
