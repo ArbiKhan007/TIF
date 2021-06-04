@@ -50,29 +50,32 @@ function LinkForm() {
   const [input, setInput] = useState();
   const [output, setOutput] = useState();
   const [isEmpty, setIsEmpty] = useState(false);
+  const [isWaiting, setIsWaiting] = useState();
 
   async function handleSubmit(e) {
     e.preventDefault();
-    setOutput();
 
     if (!input) {
       setIsEmpty(true);
+    } else {
+      setIsEmpty(false);
+      setOutput();
+      setIsWaiting(true);
+      var config = {
+        method: "get",
+        url: `https://api.shrtco.de/v2/shorten?url=${input}`,
+        header: {},
+      };
+
+      axios(config)
+        .then(function (response) {
+          const shortCode = response.data.result.short_link;
+          setOutput(shortCode);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     }
-
-    var config = {
-      method: "get",
-      url: `https://api.shrtco.de/v2/shorten?url=${input}`,
-      header: {},
-    };
-
-    axios(config)
-      .then(function (response) {
-        const shortCode = response.data.result.short_link;
-        setOutput(shortCode);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
   }
 
   return (
@@ -95,7 +98,7 @@ function LinkForm() {
       {output ? (
         <Output inputLink={input} outputLinks={output} />
       ) : (
-        <span></span>
+        <span>{isWaiting ? "Loading...." : ""}</span>
       )}
     </FormDiv>
   );
