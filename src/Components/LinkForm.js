@@ -54,7 +54,7 @@ function LinkForm() {
     e.preventDefault();
     try {
       const url = await Axios.post(
-        "https://api.shrtco.de/v2/shorten",
+        "https://api.shrtco.de/v2/shorten?url=",
         {
           input,
         },
