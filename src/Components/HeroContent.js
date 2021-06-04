@@ -41,7 +41,7 @@ function HeroContent() {
     <Wrapper>
       <HeroSection>
         <RowDiv>
-          <img src={heroimage}></img>
+          <img alt="Hero Image" src={heroimage}></img>
         </RowDiv>
         <RowDiv>
           <HeroHeading>More than just shorter links</HeroHeading>

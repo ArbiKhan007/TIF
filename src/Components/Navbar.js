@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import styles from "styled-components";
 
 import logoIcon from "../images/logo.svg";

@@ -105,7 +105,7 @@ function Footer() {
             <Feature>Features</Feature>
           </FeaturesDiv>
           <SocialMediaIconsDiv>
-            <a href="#">
+            <a href="/">
               <Icon src={facebookIcon}></Icon>
             </a>
             <a href="#">
