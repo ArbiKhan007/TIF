@@ -19,6 +19,7 @@ const Logo = styles.h1`
 
     @media (min-width: 1010px){
         flex: 1;
+        padding: 1.5rem 0;
     }
 `;
 
@@ -72,7 +73,7 @@ const ListItem = styles.li`
     @media (min-width: 1010px){
         color: #000;
         margin: 0;
-        padding: 0rem 1rem;
+        padding: 0.7rem 1rem;
     }
 `;
 
