@@ -53,6 +53,7 @@ function LinkForm() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setOutput();
 
     if (!input) {
       setIsEmpty(true);
