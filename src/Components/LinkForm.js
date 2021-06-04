@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Axios from "axios";
+import axios from "axios";
 import styled from "styled-components";
 
 import Button from "../extras/Buttons";
@@ -47,32 +47,45 @@ function LinkForm() {
   const [input, setInput] = useState();
 
   async function handleSubmit(e) {
-    const config = {
-      headers: { "Access-Control-Allow-Origin": "*" },
+    e.preventDefault();
+
+    var config = {
+      method: "get",
+      url: `https://api.shrtco.de/v2/shorten?url=${input}`,
+      headers: { "Access-Control-Allow-Origin": "http://localhost:3000/" },
     };
 
-    e.preventDefault();
-    try {
-      const url = await Axios.post(
-        "https://api.shrtco.de/v2/shorten",
-        {
-          url: input,
-        },
-        config
-      );
-      if (url.ok) {
-        console.log(url.result);
-      } else {
-        alert("Please Check");
-      }
-    } catch (e) {
-      alert(e);
-    }
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    //   try {
+    //     const url = await Axios.get(
+    //       "https://api.shrtco.de/v2/shorten",
+    //       {
+    //         params: {
+    //           url: input,
+    //         },
+    //       },
+    //       config
+    //     );
+    //     if (url.ok) {
+    //       console.log(url.result);
+    //     } else {
+    //       alert("Please Check");
+    //     }
+    //   } catch (e) {
+    //     alert(e);
+    //   }
   }
 
   return (
     <Wrapper>
-      <MainForm method="post" onSubmit={handleSubmit}>
+      <MainForm method="get" onSubmit={handleSubmit}>
         <MainInput
           name="link"
           type="text"
