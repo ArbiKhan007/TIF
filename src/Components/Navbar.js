@@ -100,7 +100,7 @@ function Navbar() {
       <Nav>
         <Logo>
           <picture>
-            <img src={logoIcon} alt="" srcset="" />
+            <img src={logoIcon} alt="" />
           </picture>
         </Logo>
 
