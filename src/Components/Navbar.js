@@ -116,7 +116,7 @@ function Navbar() {
           <ListItem>Pricing</ListItem>
           <ListItem>Resources</ListItem>
           <ListItem>Login</ListItem>
-          <Button full>Sign Up</Button>
+          <Button>Sign Up</Button>
         </List>
       </Nav>
     </Wrapper>

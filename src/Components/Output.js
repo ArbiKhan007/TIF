@@ -58,9 +58,9 @@ function Output(props) {
     <OutputContainer>
       <Wrapper>
         <OutputDiv>
-          <InputText>{props.inputLink}</InputText>
-          <OutputText>{props.outputLinks}</OutputText>
-          <Button onClick={handleClick} full rect large>
+          {/* <InputText>{props.inputLink}</InputText>
+          <OutputText>{props.outputLinks}</OutputText> */}
+          <Button onClick={handleClick} full rect>
             {copy ? "Copied" : "Copy"}
           </Button>
         </OutputDiv>

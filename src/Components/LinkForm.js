@@ -62,15 +62,21 @@ function LinkForm() {
       setOutput();
       setIsWaiting(true);
       var config = {
-        method: "get",
-        url: `https://api.shrtco.de/v2/shorten?url=${input}`,
-        header: {},
+        method: "post",
+        url: "http://13.201.93.196:8080/v1/shorten",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: {
+          originalUrl: input,
+        },
       };
 
       axios(config)
         .then(function (response) {
-          const shortCode = response.data.result.short_link;
-          setOutput(shortCode);
+          const shortCode = response.data;
+          setOutput(`http://13.201.93.196:8080/v1/${shortCode}`);
+          setIsWaiting(false);
         })
         .catch(function (error) {
           console.log(error);
@@ -90,7 +96,7 @@ function LinkForm() {
             placeholder="Shorten a link here..."
           />
 
-          <Button type="submit" full rect>
+          <Button type="submit" rect>
             Shorten It!
           </Button>
         </MainForm>

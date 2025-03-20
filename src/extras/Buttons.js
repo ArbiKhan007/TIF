@@ -17,7 +17,7 @@ const Button = styled.button`
 
   @media (min-width: 1010px) {
     margin: ${(props) => (props.centeredBigScreen ? "0 auto" : "0")};
-    width: auto;
+    width: ${(props) => (props.full ? "100%" : "auto")};
   }
 `;
 

@@ -50,9 +50,7 @@ function HeroContent() {
             links are performing.
           </SubHeading>
           <BtnContainer>
-            <Button large centered>
-              Get Started
-            </Button>
+            <Button centered>Get Started</Button>
           </BtnContainer>
         </RowDiv>
       </HeroSection>
